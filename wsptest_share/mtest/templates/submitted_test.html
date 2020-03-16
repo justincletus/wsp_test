@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+    {% block content %}
+        <div class="container">
+            {% if user.is_staff %}
+          <h4>Submitted Answers</h4>
+            <table class="table">
+                <tr>
+                    <th>S.No</th>
+                    <th>Username</th>
+                    <th>Question</th>
+                    <th>Answer</th>
+                    <th>Mark</th>
+                </tr>
+                {% for subAns in submittedAns %}
+                <tr>
+                    <td> {{ subAns.id }} </td>
+                    <td> {{ subAns.user }} </td>
+                    <td> {{ subAns.question }} </td>
+                    <td> {{ subAns.answer }} </td>
+                    <td> {{ subAns.marks }} </td>
+
+                </tr>
+                {% endfor %}
+
+            </table>
+            {% else %}
+            <h4> Submitted test details </h4>
+                {% if test_name %}
+                    <p> {{ test_name }} </p>
+                    <div class="card">
+                        <div class="card-body">                    
+                            {% for ans in userAns %}                     
+                            
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% elif userAnswers %}
+                <div class="card">
+                    <p>You Scored :</p>
+                    <div class="card-body">                    
+                        {% for ans in userAnswers %}                            
+                            <h4> {{ ans.marks }} </h4>                 
+                        
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+            {% endif %}
+
+        </div>
+        
+    {% endblock %}

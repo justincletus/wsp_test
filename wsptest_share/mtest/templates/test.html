@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+    {% block content %}
+        <div class="container">
+          <div>
+            {% if messages %}
+            <ul class="messages">
+              {% for messages in message %}
+                <li {% if message.tgs %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+              {% endfor %}
+
+            </ul>
+            {% endif %}
+          </div>
+          {% if tests %}
+            <div class="card">
+              <div class="card-body">                    
+                {% for tes in tests %}                        
+                   <a href="{% url 'test_detail' tes.id %}"> {{ tes }} </a> 
+                {% endfor %}
+              </div>
+            </div>
+          {% endif %}
+          <form action="" method="POST">
+            {% csrf_token %}
+            {% for question in questions %}
+            <div class="form-group">
+              {{ question.id }}. <label for="test"> {{ question.question }} </label>
+              <input type="number" name="value" value="{{ question.id }}" hidden>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="exampleRadios-{{ question.id }}" id="exampleRadios1" value="{{ question.a1 }}">
+              <label class="form-check-label" for="exampleRadios1">
+                {{ question.a1 }}
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="exampleRadios-{{ question.id }}" id="exampleRadios2" value="{{ question.a2 }}">
+              <label class="form-check-label" for="exampleRadios2">
+                {{ question.a2 }}
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="exampleRadios-{{ question.id }}" id="exampleRadios1" value="{{ question.a3 }}">
+              <label class="form-check-label" for="exampleRadios1">
+                {{ question.a3 }}
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="exampleRadios-{{ question.id }}" id="exampleRadios2" value="{{ question.a4 }}">
+              <label class="form-check-label" for="exampleRadios2">
+                {{ question.a4 }}
+              </label>
+            </div>            
+            {% endfor %}
+
+            <div class="form-group">
+              <input type="submit" role="button" value="Submit">
+            </div>
+          </form> 
+            
+
+        </div>
+        
+    {% endblock %}

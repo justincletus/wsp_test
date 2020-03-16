@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+    {% block content %}
+        <div class="container">
+          <div>
+            {% if messages %}
+            <ul class="messages">
+              {% for messages in message %}
+                <li {% if message.tgs %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+              {% endfor %}
+
+            </ul>
+            {% endif %}
+          </div>
+          <div>
+              {% if tests %}
+              <ul>
+                  <p> <a href="{% url 'testcate' %} "> Create Test Category </a> </p>
+                  {% for test in tests %}
+                  <li> <a href="{% url 'test_detail' test.id %} "> {{ test }} </a> </li>
+                  {% endfor %}
+              </ul>
+              {% endif %}
+          </div> 
+            
+
+        </div>
+        
+    {% endblock %}

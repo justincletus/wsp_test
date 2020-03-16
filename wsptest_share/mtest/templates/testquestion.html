@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+    {% block content %}
+        <div class="container">
+            {% if test %}
+                <h4> List of question in {{ test }} </h4>
+            {% endif %}
+            <a class="btn btn-primary" href="#" onclick="addQuestion()">Add Questions</a>
+            <table class="table">
+                <tr>
+                    <th>S.No</th>
+                    <th>Question</th>
+                    <th>Answer-1</th>
+                    <th>Answer-2</th>
+                    <th>Answer-3</th>
+                    <th>Answer-4</th>
+                    <th>Correct-Answer</th>
+                    <th>Marks</th>
+                    <th>Action</th>
+                </tr>
+                {% for ques in questions %}
+                <tr>
+                    <td> {{ ques.id }} </td>
+                    <td>{{ ques.question}} </td>
+                    <td>{{ ques.a1 }} </td>
+                    <td>{{ ques.a2 }} </td>
+                    <td> {{ ques.a3 }} </td>
+                    <td> {{ ques.a4 }} </td>
+                    <td>{{ques.answer }}</td>
+                    <td>{{ ques.marks }} </td>
+                    <td></td>
+                </tr>
+                {% endfor %}
+            </table>
+            <div>
+                
+                {% if form %}
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {% for field in form %}
+                    <div class="fieldWrapper">
+                        {{ field.errors }}
+                        {{ field.label_tag }} {{ field }}
+                        {% if field.help_text %}
+                        <p class="help"> {{ field.help_text|safe }} </p>
+                        {% endif %}
+    
+                    </div>
+                    {% endfor %}
+                    
+                    <input type="submit" value="Submit">
+                </form>
+                    
+                {% endif %}
+            </div>
+
+        </div>
+    {% endblock %}
+
+    <script type="text/javascript">
+        var a = " {{ ques.a1 }} ";
+        console.log(a);
+        alert(a);
+    </script>
