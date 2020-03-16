@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+    {% block content %}
+        <div class="container">            
+            {% if not user.is_staff %}
+            <p> Take your programming skill test Online. </p>
+            <div class="card">
+                <div class="card-body">                    
+                    {% for tes in tests %}                        
+                       <a href="{% url 'home' %}test/{{tes.id}}"> {{ tes }} </a> 
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+        </div>
+        
+    {% endblock %}
